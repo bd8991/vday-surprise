@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine's Proposal 💘</title>
+  <style>
+    body {
+      background: radial-gradient(circle, #ff2a6d, #8b0037);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: white;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      max-width: 420px;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .inside-joke {
+      font-style: italic;
+      color: #ffd1dc;
+      margin-bottom: 30px;
+    }
+
+    button {
+      background: white;
+      color: #ff2a6d;
+      border: none;
+      padding: 14px 28px;
+      margin: 10px;
+      border-radius: 35px;
+      font-size: 1.1em;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #noBtn {
+      position: absolute;
+    }
+
+    #response {
+      margin-top: 30px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffe6ee;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 🎶 Background Music -->
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>To Sexy 💋</h1>
+
+    <p>
+      From your Hun ❤️<br><br>
+      You drive me crazy in the best way,<br>
+      you're my favorite distraction,<br>
+      and my forever kind of trouble 😏
+    </p>
+
+    <div class="inside-joke">
+      Remember: <br>
+      <strong>"You stealing the blankets every night 😤"</strong> 😘
+    </div>
+
+    <h2>So tell me…</h2>
+    <h2>Will you be my Valentine? 🔥💘</h2>
+
+    <button onclick="sayYes()">Yes, obviously 😍</button>
+    <button id="noBtn" onmouseover="runAway()">No 🙄</button>
+
+    <div id="response"></div>
+  </div>
+
+  <script>
+    function sayYes() {
+      document.getElementById("response").innerHTML =
+        "Good choice 😈💍 You're mine this Valentine's… and every day after ❤️‍🔥";
+    }
+
+    function runAway() {
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    }
+  </script>
+
+</body>
+</html>
