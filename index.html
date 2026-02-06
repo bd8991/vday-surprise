@@ -2,38 +2,102 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Valentine's Proposal 💘</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       background: radial-gradient(circle, #ff2a6d, #8b0037);
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
       color: white;
-      overflow: hidden;
-    }
-
-    .card {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 40px;
-      border-radius: 25px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-      max-width: 420px;
-      text-align: center;
+      overflow-x: hidden;
       position: relative;
     }
 
+    /* Falling Hearts Animation */
+    .heart {
+      position: fixed;
+      top: -10%;
+      font-size: 2em;
+      opacity: 0.7;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        top: 110%;
+        transform: translateX(100px) rotate(360deg);
+      }
+    }
+
+    /* Card Styling */
+    .card {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1s ease-in;
+      backdrop-filter: blur(10px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Profile Image */
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px solid white;
+      margin-bottom: 20px;
+      object-fit: cover;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .img-placeholder {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 5px dashed rgba(255,255,255,0.5);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+    }
+
     h1 {
-      font-size: 2.4em;
-      margin-bottom: 10px;
+      font-size: 2.8em;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
     }
 
     p {
-      font-size: 1.2em;
-      line-height: 1.5;
+      font-size: 1.3em;
+      line-height: 1.6;
       margin-bottom: 25px;
     }
 
@@ -41,49 +105,140 @@
       font-style: italic;
       color: #ffd1dc;
       margin-bottom: 30px;
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 15px;
+    }
+
+    h2 {
+      margin: 15px 0;
+      font-size: 1.6em;
+    }
+
+    .button-container {
+      margin-top: 30px;
+      position: relative;
+      height: 120px;
     }
 
     button {
       background: white;
       color: #ff2a6d;
       border: none;
-      padding: 14px 28px;
+      padding: 16px 32px;
       margin: 10px;
-      border-radius: 35px;
-      font-size: 1.1em;
+      border-radius: 50px;
+      font-size: 1.2em;
+      font-weight: bold;
       cursor: pointer;
-      position: relative;
-      transition: transform 0.2s;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
 
     button:hover {
-      transform: scale(1.1);
+      transform: scale(1.15);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff6b9d, #c94b7d);
+      color: white;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
     }
 
     #noBtn {
       position: absolute;
+      background: #888;
     }
 
     #response {
       margin-top: 30px;
-      font-size: 1.5em;
+      font-size: 1.6em;
       font-weight: bold;
       color: #ffe6ee;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+      animation: slideIn 0.5s ease-out;
     }
 
-    audio {
-      display: none;
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #f0f;
+      position: fixed;
+      top: -10px;
+      z-index: 9999;
+      animation: confetti-fall 3s linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Music Control */
+    .music-control {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1.1em;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s;
+    }
+
+    .music-control:hover {
+      background: rgba(255,255,255,0.3);
+      transform: scale(1.05);
     }
   </style>
 </head>
 <body>
 
-  <!-- 🎶 Background Music -->
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+  <!-- Music Control -->
+  <button class="music-control" onclick="toggleMusic()">🎵 Music: <span id="musicStatus">ON</span></button>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romanticmoment.mp3" type="audio/mpeg">
   </audio>
 
   <div class="card">
+    <!-- Add your image here - Replace the emoji with an <img> tag -->
+    <div class="img-placeholder">💑</div>
+    <!-- Uncomment and add your image URL:
+    <img src="YOUR_IMAGE_URL_HERE" alt="Us" class="profile-img">
+    -->
+
     <h1>To Sexy 💋</h1>
 
     <p>
@@ -101,25 +256,95 @@
     <h2>So tell me…</h2>
     <h2>Will you be my Valentine? 🔥💘</h2>
 
-    <button onclick="sayYes()">Yes, obviously 😍</button>
-    <button id="noBtn" onmouseover="runAway()">No 🙄</button>
+    <div class="button-container">
+      <button id="yesBtn" onclick="sayYes()">Yes, obviously 😍</button>
+      <button id="noBtn" onmouseover="runAway()">No 🙄</button>
+    </div>
 
     <div id="response"></div>
   </div>
 
   <script>
-    function sayYes() {
-      document.getElementById("response").innerHTML =
-        "Good choice 😈💍 You're mine this Valentine's… and every day after ❤️‍🔥";
+    // Create falling hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 5 + 's';
+      heart.style.opacity = Math.random() * 0.5 + 0.3;
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
     }
 
+    // Generate hearts continuously
+    setInterval(createHeart, 300);
+
+    // Music toggle
+    let musicPlaying = true;
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      const status = document.getElementById('musicStatus');
+      if (musicPlaying) {
+        music.pause();
+        status.textContent = 'OFF';
+        musicPlaying = false;
+      } else {
+        music.play();
+        status.textContent = 'ON';
+        musicPlaying = true;
+      }
+    }
+
+    // Yes button - create confetti
+    function sayYes() {
+      document.getElementById("response").innerHTML =
+        "Good choice 😈💍<br>You're mine this Valentine's… and every day after ❤️‍🔥";
+      
+      // Create confetti explosion
+      for (let i = 0; i < 150; i++) {
+        createConfetti();
+      }
+    }
+
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.animationDelay = Math.random() * 0.5 + 's';
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 3000);
+    }
+
+    // No button - runs away
     function runAway() {
       const btn = document.getElementById("noBtn");
-      const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+      const container = document.querySelector('.button-container');
+      const containerRect = container.getBoundingClientRect();
+      
+      const maxX = window.innerWidth - btn.offsetWidth - 20;
+      const maxY = window.innerHeight - btn.offsetHeight - 20;
+      
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      
+      btn.style.position = 'fixed';
       btn.style.left = x + "px";
       btn.style.top = y + "px";
     }
+
+    // Start music on first interaction (browser requirement)
+    document.body.addEventListener('click', function() {
+      const music = document.getElementById('bgMusic');
+      music.play().catch(e => console.log('Music autoplay prevented'));
+    }, { once: true });
   </script>
 
 </body>
